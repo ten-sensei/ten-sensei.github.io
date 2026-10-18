@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>north9 — VoIP / Unified Communications, IT Engineering, DX &amp; AI</title>
+  <meta name="description" content="north9 は、VoIP・ユニファイドコミュニケーションシステムの開発、IT 技術支援、業務の DX・AI 化支援を行う個人事業です。Fukuoka, Japan.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-2: #0f1630;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-hover: rgba(255, 255, 255, 0.07);
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --text: #e8ecf6;
+      --muted: #9aa6c2;
+      --faint: #6b7694;
+      --accent-a: #2ee6c5;
+      --accent-b: #7c8cff;
+      --accent: #5fd9e6;
+      --font: "Inter", "Segoe UI", system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Noto Sans JP", Meiryo, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+    /* ---- header ---- */
+    header.site {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11, 16, 32, 0.72);
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 700; letter-spacing: 0.02em; font-size: 19px; }
+    .brand:hover { text-decoration: none; }
+    .brand svg { width: 28px; height: 28px; flex: none; }
+    nav.primary { display: flex; gap: 24px; font-size: 14px; }
+    nav.primary a { color: var(--muted); }
+    nav.primary a:hover { color: var(--text); text-decoration: none; }
+    @media (max-width: 640px) { nav.primary { display: none; } }
+
+    /* ---- hero ---- */
+    .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero::before {
+      content: ""; position: absolute; inset: -20% -10% auto -10%; height: 140%;
+      background:
+        radial-gradient(40% 50% at 18% 30%, rgba(46, 230, 197, 0.22), transparent 70%),
+        radial-gradient(45% 55% at 82% 20%, rgba(124, 140, 255, 0.26), transparent 70%),
+        radial-gradient(35% 40% at 60% 90%, rgba(95, 217, 230, 0.12), transparent 70%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 85%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero .wrap { position: relative; z-index: 1; padding-top: 104px; padding-bottom: 112px; }
+    .eyebrow {
+      display: inline-flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+      margin: 0 0 28px;
+    }
+    .eyebrow span { display: inline-flex; align-items: center; gap: 14px; }
+    .eyebrow span + span::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--faint); }
+    @media (max-width: 640px) { .eyebrow { display: grid; gap: 4px; } .eyebrow span + span::before { display: none; } }
+    h1 {
+      margin: 0 0 28px;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      max-width: 14ch;
+    }
+    h1 .grad {
+      background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lead { font-size: clamp(16px, 2.1vw, 19px); color: #c9d1e6; max-width: 40em; margin: 0 0 40px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 44px; padding: 0 20px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      border: 1px solid var(--line-strong); color: var(--text); background: var(--surface);
+    }
+    .btn:hover { text-decoration: none; background: var(--surface-hover); }
+    .btn.primary { border: 0; color: #06121a; background: linear-gradient(100deg, var(--accent-a), var(--accent-b)); }
+    .btn.primary:hover { filter: brightness(1.06); }
+
+    /* ---- sections ---- */
+    section.block { padding: 96px 0; border-bottom: 1px solid var(--line); }
+    @media (max-width: 640px) { section.block { padding: 72px 0; } .hero .wrap { padding-top: 72px; padding-bottom: 80px; } }
+    .section-head { display: grid; gap: 6px; margin-bottom: 40px; }
+    .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    h2 { margin: 0; font-size: clamp(26px, 3.6vw, 38px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 750; }
+    .section-head p { margin: 8px 0 0; color: var(--muted); max-width: 44em; }
+
+    .cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 860px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card {
+      position: relative; padding: 28px 24px 26px; border-radius: 16px;
+      background: var(--surface); border: 1px solid var(--line);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover { background: var(--surface-hover); border-color: var(--line-strong); transform: translateY(-2px); }
+    @media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
+    .card .icon {
+      width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 20px;
+      background: linear-gradient(140deg, rgba(46, 230, 197, 0.18), rgba(124, 140, 255, 0.18));
+      border: 1px solid var(--line-strong);
+    }
+    .card .icon svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .card .en { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+    .card h3 { margin: 0 0 12px; font-size: 19px; line-height: 1.45; letter-spacing: -0.005em; }
+    .card p { margin: 0; color: #c3cbe0; font-size: 15px; }
+
+    .product {
+      display: grid; gap: 24px; align-items: center;
+      padding: 32px; border-radius: 20px;
+      background: linear-gradient(140deg, rgba(46, 230, 197, 0.08), rgba(124, 140, 255, 0.10));
+      border: 1px solid var(--line-strong);
+    }
+    @media (min-width: 760px) { .product { grid-template-columns: 1fr auto; padding: 40px; } }
+    .product .name { font-size: 28px; font-weight: 800; letter-spacing: 0.06em; margin: 0 0 6px; }
+    .product p { margin: 0; color: #c9d1e6; }
+    .product .tag { display: inline-block; font-size: 12px; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px 10px; margin-top: 14px; }
+
+    dl.profile { margin: 0; display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+    dl.profile > div { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    @media (min-width: 640px) { dl.profile > div { grid-template-columns: 220px 1fr; gap: 24px; } }
+    dl.profile dt { color: var(--muted); font-size: 14px; }
+    dl.profile dt small { display: block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+    dl.profile dd { margin: 0; }
+    dl.profile ul { margin: 0; padding-left: 1.1em; }
+
+    .notice {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 22px 24px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .notice .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; margin-top: 9px; background: #f2b84b; box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.16); }
+    .notice p { margin: 0; }
+    .notice .sub { color: var(--muted); font-size: 14px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--faint); font-size: 13px; }
+    footer.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="North9 トップ">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="n9g" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#2ee6c5"/>
+              <stop offset="1" stop-color="#7c8cff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="url(#n9g)" stroke-width="3.5"/>
+          <path d="M32 6 L41 36 L32 31 L23 36 Z" fill="url(#n9g)"/>
+          <circle cx="32" cy="40" r="3.6" fill="#e8ecf6"/>
+        </svg>
+        North9
+      </a>
+      <nav class="primary" aria-label="ページ内">
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#profile">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow"><span>VoIP / Unified Communications</span><span>IT Engineering</span><span>DX &amp; AI</span></p>
+        <h1>Engineering how <span class="grad">business connects.</span></h1>
+        <p class="lead">声とメッセージをつなぐコミュニケーション基盤の開発から、日々の業務の DX・AI 化まで。技術で、仕事の流れをつくり直します。</p>
+        <div class="cta">
+          <a class="btn primary" href="#services">事業内容を見る</a>
+          <a class="btn" href="#profile">事業者情報</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Services</span>
+          <h2>事業内容</h2>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/><path d="M15 3a6 6 0 0 1 6 6"/><path d="M15 7a2 2 0 0 1 2 2"/></svg>
+            </div>
+            <p class="en">VoIP &amp; Unified Communications</p>
+            <h3>VoIP・ユニファイドコミュニケーション開発</h3>
+            <p>通話・ビデオ・チャットなど、分かれていたやり取りを一つにまとめるコミュニケーションシステムを、設計から開発まで手がけます。</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3"/><path d="M16 9l4 3-4 3"/><path d="M13.5 5l-3 14"/></svg>
+            </div>
+            <p class="en">IT Engineering Support</p>
+            <h3>IT 技術支援</h3>
+            <p>システムの設計・開発・運用を、技術の面から支えます。課題の整理から実装まで、現場に寄り添って進めます。</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="M5.6 5.6l2.1 2.1"/><path d="M16.3 16.3l2.1 2.1"/><path d="M5.6 18.4l2.1-2.1"/><path d="M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
+            </div>
+            <p class="en">DX &amp; AI Enablement</p>
+            <h3>業務の DX・AI 化支援</h3>
+            <p>業務の流れを見直し、データと AI を組み込んで、手作業を仕組みに置き換えます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="products">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Products</span>
+          <h2>プロダクト</h2>
+          <p>自社で開発・運用しているサービスです。</p>
+        </div>
+        <div class="product">
+          <div>
+            <p class="name">TENPIN</p>
+            <p>日本株の情報を整理・分析するための道具です。</p>
+            <span class="tag">招待制</span>
+          </div>
+          <a class="btn" href="https://tenpin.north9.jp/">tenpin.north9.jp →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="profile">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Profile</span>
+          <h2>事業者情報</h2>
+        </div>
+        <dl class="profile">
+          <div><dt><small>Name</small>屋号</dt><dd>north9</dd></div>
+          <div><dt><small>Type</small>形態</dt><dd>個人事業 / Sole proprietorship</dd></div>
+          <div><dt><small>Established</small>開業</dt><dd>2026</dd></div>
+          <div><dt><small>Location</small>所在地</dt><dd>Fukuoka, Japan</dd></div>
+          <div><dt><small>Business</small>事業内容</dt><dd>
+            <ul>
+              <li>VoIP・ユニファイドコミュニケーションシステムの開発</li>
+              <li>IT 技術支援</li>
+              <li>業務の DX・AI 化支援</li>
+              <li>自社サービスの開発・運用</li>
+            </ul>
+          </dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="block" id="availability">
+      <div class="wrap">
+        <div class="notice" role="note">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <p>現在、新規のご依頼はお受けしていません。</p>
+            <p class="sub">We are currently not accepting new projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 north9</span>
+      <span>Fukuoka, Japan</span>
+    </div>
+  </footer>
+</body>
+</html>
